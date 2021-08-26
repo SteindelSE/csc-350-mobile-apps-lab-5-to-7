@@ -1,0 +1,10 @@
+/*
+  Name: Derek Steindel
+  Date: 8/5/21
+  Assignment: Week 5 Lab - Casual Screen Time Tracker
+*/
+
+canvas {
+  box-sizing: content-box;
+  border: solid 5px #ff0000;
+}

@@ -1,0 +1,531 @@
+<!--
+  Assignment: Week 5 Lab - Casual Screen Time Tracker
+  Author: Derek Steindel
+  Date: 8/5/21
+  Purpose: Pages for tracker app to be displayed/updated
+-->
+
+<!--
+  OBJECTIVES:
+  -Collect user's goal number of hours not to exceed for casual screen time per day as part of their profile
+  -Collect user's number of hours of casual screen time as part of the add record page
+  -Record page will show date and hours of screen time
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screen Time Nanny</title>
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+  <body>
+    <!-- Login Page -->
+    <div data-role="page" id="page-login">
+      <div data-role="header">
+        <h1>Screen Time<br />Nanny</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>Login PIN</h2>
+        <input type="password" id="txtPIN" />
+        <div data-role="controlgroup" id="numKeyPad">
+          <a data-role="button" id="btnEnter">Enter</a>
+          <a href="#page-about" data-role="button">About</a>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal">
+          <a data-role="button" onclick="addValueToPin(7)">7</a>
+          <a data-role="button" onclick="addValueToPin(8)">8</a>
+          <a data-role="button" onclick="addValueToPin(9)">9</a>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal">
+          <a data-role="button" onclick="addValueToPin(4)">4</a>
+          <a data-role="button" onclick="addValueToPin(5)">5</a>
+          <a data-role="button" onclick="addValueToPin(6)">6</a>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal">
+          <a data-role="button" onclick="addValueToPin(1)">1</a>
+          <a data-role="button" onclick="addValueToPin(2)">2</a>
+          <a data-role="button" onclick="addValueToPin(3)">3</a>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal">
+          <a data-role="button" onclick="addValueToPin(0)">0</a>
+          <a
+            data-role="button"
+            onclick="addValueToPin('pop')"
+            data-icon="delete"
+            >Del</a
+          >
+        </div>
+      </div>
+
+      <div data-role="footer">
+        <p>
+          <small>Copyright &copy; 2021 - Derek Steindel</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- About Page -->
+    <div data-role="page" id="page-about">
+      <div data-role="header">
+        <a
+          href="#page-login"
+          data-rel="back"
+          data-role="button"
+          data-icon="back"
+          data-iconpos="left"
+          data-inline="true"
+          >Back</a
+        >
+        <a
+          href=""
+          data-role="button"
+          data-icon="info"
+          data-iconpos="right"
+          data-inline="true"
+          class="ui-btn-active ui-shadow"
+          >About</a
+        >
+        <h1>Screen Time<br />Nanny</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>About</h2>
+        <p>
+          This application will track non-work/school related casual screen
+          time.
+        </p>
+        <h4>How To Use</h4>
+        <p>
+          Simply log into the app any time you stop using a screen and log how
+          long you've spent in front of the screen for that device.
+        </p>
+        <p>Screens include items such as:</p>
+        <ul>
+          <li>Desktop Computer</li>
+          <li>Laptop Computer</li>
+          <li>Game Console</li>
+          <li>Tablet</li>
+          <li>Phone</li>
+        </ul>
+        <h4>Feedback Provided</h4>
+        <p>
+          The application will provide access to records entered as well as
+          graphs and advice based on the records entered.
+        </p>
+      </div>
+
+      <div data-role="footer">
+        <p>
+          <small>Copyright &copy; 2021 - Derek Steindel</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- Disclaimer Page -->
+    <div data-role="page" id="page-disclaimer">
+      <div data-role="header">
+        <h1>Screen Time<br />Nanny</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>Disclaimer</h2>
+        <h4>By using this program, you agree to the license as follows:</h4>
+        <p>
+          This is free and unencumbered software released into the public
+          domain.
+        </p>
+
+        <p>
+          Anyone is free to copy, modify, publish, use, compile, sell, or
+          distribute this software, either in source code form or as a compiled
+          binary, for any purpose, commercial or non-commercial, and by any
+          means.
+        </p>
+
+        <p>
+          In jurisdictions that recognize copyright laws, the author or authors
+          of this software dedicate any and all copyright interest in the
+          software to the public domain. We make this dedication for the benefit
+          of the public at large and to the detriment of our heirs and
+          successors. We intend this dedication to be an overt act of
+          relinquishment in perpetuity of all present and future rights to this
+          software under copyright law.
+        </p>
+
+        <p>
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+          EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+          MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+          IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+          OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+          ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+          OTHER DEALINGS IN THE SOFTWARE.
+        </p>
+
+        <!-- Temporarily link back to home page until implemented as forced disclaimer -->
+        <a data-role="button" id="btnAgree">I Agree</a>
+      </div>
+
+      <div data-role="footer">
+        <p>
+          <small>Copyright &copy; 2021 - Derek Steindel</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- User Information -->
+    <div data-role="page" id="page-user-info">
+      <div data-role="header">
+        <a
+          href="#page-menu"
+          data-role="button"
+          data-icon="bars"
+          data-iconpos="left"
+          data-inline="true"
+          >Menu</a
+        >
+        <a
+          href="#page-about"
+          data-role="button"
+          data-icon="info"
+          data-iconpos="right"
+          data-inline="true"
+          >About</a
+        >
+        <h1>Screen Time<br />Nanny</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>User Information</h2>
+        <form id="frmUserInfo">
+          <div data-role="fieldcontain">
+            <label for="txtFirstName">First Name:</label>
+            <input
+              type="text"
+              placeholder="First Name"
+              name="txtFirstName"
+              data-mini="false"
+              id="txtFirstName"
+              value=""
+              required
+            />
+          </div>
+          <div data-role="fieldcontain">
+            <label for="txtLastName">Last Name:</label>
+            <input
+              type="text"
+              placeholder="Last Name"
+              name="txtLastName"
+              data-mini="false"
+              id="txtLastName"
+              value=""
+              required
+            />
+          </div>
+          <div data-role="fieldcontain">
+            <label for="dateBirthday">Birthday:</label>
+            <input
+              type="date"
+              name="dateBirthday"
+              data-mini="false"
+              id="dateBirthday"
+              value=""
+              required
+            />
+          </div>
+          <div data-role="fieldcontain">
+            <label for="txtNewPIN">Edit PIN:</label>
+            <input
+              type="password"
+              placeholder="*****"
+              name="txtNewPIN"
+              data-mini="false"
+              id="txtNewPIN"
+              value=""
+              required
+            />
+          </div>
+          <div data-role="fieldcontain">
+            <p><strong>Additional Settings</strong></p>
+            <label for="sldMaxHoursPerDay"
+              >Maximum Desired Screen Time Hours Per Day:</label
+            >
+            <input
+              type="range"
+              name="sldMaxHoursPerDay"
+              id="sldMaxHoursPerDay"
+              value="1"
+              min="1"
+              max="16"
+              data-highlight="true"
+            />
+          </div>
+          <div data-role="fieldcontain">
+            <button type="button" id="btnSubmitUpdatedUserInfo">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <div data-role="footer">
+        <p>
+          <small>Copyright &copy; 2021 - Derek Steindel</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- Menu Page -->
+    <div data-role="page" id="page-menu">
+      <div data-role="header">
+        <a
+          href=""
+          data-role="button"
+          data-icon="bars"
+          data-iconpos="left"
+          data-inline="true"
+          class="ui-btn-active ui-shadow"
+          >Menu</a
+        >
+        <a
+          href="#page-about"
+          data-role="button"
+          data-icon="info"
+          data-iconpos="right"
+          data-inline="true"
+          >About</a
+        >
+        <h1>Screen Time<br />Nanny</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <div data-role="controlgroup" id="menu">
+          <a href="#page-user-info" data-role="button">User Information</a>
+          <a href="#page-records" data-role="button">Records</a>
+          <a href="#page-graph" data-role="button">Records Graph</a>
+          <a href="#page-advice" data-role="button">Advice</a>
+        </div>
+      </div>
+
+      <div data-role="footer">
+        <p>
+          <small>Copyright &copy; 2021 - Derek Steindel</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- Records Page -->
+    <div data-role="page" id="page-records">
+      <div data-role="header">
+        <a
+          href="#page-menu"
+          data-role="button"
+          data-icon="bars"
+          data-iconpos="left"
+          data-inline="true"
+          >Menu</a
+        >
+        <a
+          href="#page-about"
+          data-role="button"
+          data-icon="info"
+          data-iconpos="right"
+          data-inline="true"
+          >About</a
+        >
+        <h1>Screen Time<br />Nanny</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>Recorded Entries</h2>
+        <div data-role="fieldcontain">
+          <!-- Three placeholder values to be replaced programmatically using id -->
+          <div id="grpRecordPageUserInfo"></div>
+        </div>
+        <div data-role="fieldcontain">
+          <a href="#page-record-form" data-role="button" id="btnAddRecord"
+            >Add</a
+          >
+          <button id="btnClearRecords">Clear All Records</button>
+        </div>
+
+        <!-- table heading/caption/generated information will be handled in the script when we get to that part -->
+        <table
+          id="tblUserRecords"
+          class="ui-responsive table-stripe"
+          data-mode="reflow"
+        ></table>
+      </div>
+
+      <div data-role="footer">
+        <p>
+          <small>Copyright &copy; 2021 - Derek Steindel</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- Record Form Page -->
+    <div data-role="page" id="page-record-form">
+      <div data-role="header">
+        <a
+          href="#page-menu"
+          data-role="button"
+          data-icon="bars"
+          data-iconpos="left"
+          data-inline="true"
+          >Menu</a
+        >
+        <a
+          href="#page-about"
+          data-role="button"
+          data-icon="info"
+          data-iconpos="right"
+          data-inline="true"
+          >About</a
+        >
+        <h1>Screen Time<br />Nanny</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>Record New Entry</h2>
+        <form id="frmRecord">
+          <div data-role="fieldcontain">
+            <label for="dtEntryDate">Entry Date:</label>
+            <input
+              type="date"
+              name="dtEntryDate"
+              data-mini="false"
+              id="dtEntryDate"
+              value=""
+              required
+            />
+          </div>
+          <div data-role="fieldcontain">
+            <label for="sldMinutes">Minutes:</label>
+            <input
+              type="range"
+              name="sldMinutes"
+              id="sldMinutes"
+              value="0"
+              min="0"
+              max="59"
+              data-highlight="true"
+            />
+          </div>
+          <div data-role="fieldcontain">
+            <label for="sldHours">Hours:</label>
+            <input
+              type="range"
+              name="sldHours"
+              id="sldHours"
+              value="1"
+              min="0"
+              max="24"
+              data-highlight="true"
+            />
+          </div>
+          <input type="submit" id="btnSubmitNewRecord" value="" />
+        </form>
+      </div>
+
+      <div data-role="footer">
+        <p>
+          <small>Copyright &copy; 2021 - Derek Steindel</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- TODO: Graph Page -->
+    <div data-role="page" id="page-graph">
+      <div data-role="header">
+        <a
+          href="#page-menu"
+          data-role="button"
+          data-icon="bars"
+          data-iconpos="left"
+          data-inline="true"
+          >Menu</a
+        >
+        <a
+          href="#page-about"
+          data-role="button"
+          data-icon="info"
+          data-iconpos="right"
+          data-inline="true"
+          >About</a
+        >
+        <h1>Screen Time<br />Nanny</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>Screen Time per Day</h2>
+        <canvas id="recordGraph" width="500" height="500"></canvas>
+      </div>
+
+      <div data-role="footer">
+        <p>
+          <small>Copyright &copy; 2021 - Derek Steindel</small>
+        </p>
+      </div>
+    </div>
+
+    <!-- TODO: Advice Page -->
+    <div data-role="page" id="page-advice">
+      <div data-role="header">
+        <a
+          href="#page-menu"
+          data-role="button"
+          data-icon="bars"
+          data-iconpos="left"
+          data-inline="true"
+          >Menu</a
+        >
+        <a
+          href="#page-about"
+          data-role="button"
+          data-icon="info"
+          data-iconpos="right"
+          data-inline="true"
+          >About</a
+        >
+        <h1>Screen Time<br />Nanny</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>Advice</h2>
+        <canvas id="adviceGauge" width="550" height="550"></canvas>
+        <!-- We'll add advice line items to this programmatically based on advice determined from conditinal logic -->
+        <ul id="ulAdvice"></ul>
+      </div>
+
+      <div data-role="footer">
+        <p>
+          <small>Copyright &copy; 2021 - Derek Steindel</small>
+        </p>
+      </div>
+    </div>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/pageLoader.js"></script>
+    <script src="scripts/records.js"></script>
+    <script src="scripts/userForm.js"></script>
+    <script src="scripts/advice.js"></script>
+    <script src="scripts/graph.js"></script>
+
+    <!-- RGraph JavaScript files -->
+    <script src="scripts/RGraph/RGraph.common.core.js"></script>
+    <script src="scripts/RGraph/RGraph.common.effects.js"></script>
+    <script src="scripts/RGraph/RGraph.cornergauge.js"></script>
+    <script src="scripts/RGraph/RGraph.hprogress.js"></script>
+    <script src="scripts/RGraph/RGraph.line.js"></script>
+  </body>
+</html>
